@@ -66,4 +66,5 @@ public class NesneAcma : MonoBehaviour
     }
 }
 // kod kamerada
+//camera child soket ekle ve ileri sürükle nesne tutmak için
 // objeye rigidbody ekle
