@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ses : MonoBehaviour
+{
+    public Sprite[] beklemeAnim;
+    public Sprite[] ziplamaAnim;
+    public Sprite[] yurumeAnim;
+
+    SpriteRenderer spriteRendere;
+    Rigidbody2D fizik;
+    Vector3 vec;
+
+    float horizontal = 0;
+    public float speed = 10;
+
+    void Start()
+    {
+        spriteRendere = GetComponent<SpriteRenderer>();
+        fizik = GetComponent<Rigidbody2D>();
+    }
+
+    void FixUpdate()
+    {
+        Animasyon();
+        karakterHaraket();
+    }
+
+    void karakterHaraket()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vec = new Vector3(horizontal * speed, fizik.velocity.y, 0);
+        fizik.velocity = vec;
+    }
+
+    void Animasyon()
+    {
+
+    }
+}
