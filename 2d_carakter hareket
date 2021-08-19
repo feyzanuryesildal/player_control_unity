@@ -14,11 +14,24 @@ public class ses : MonoBehaviour
 
     float horizontal = 0;
     public float speed = 10;
+    bool birKereZipla = true;
 
     void Start()
     {
         spriteRendere = GetComponent<SpriteRenderer>();
         fizik = GetComponent<Rigidbody2D>();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (birKereZipla)
+            {
+                fizik.AddForce(new Vector2(0, 500));
+                birKereZipla = false;
+            }
+            
+        }
     }
 
     void FixUpdate()
@@ -32,6 +45,10 @@ public class ses : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vec = new Vector3(horizontal * speed, fizik.velocity.y, 0);
         fizik.velocity = vec;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        birKereZipla = true;
     }
 
     void Animasyon()
