@@ -1,0 +1,116 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Anim_AtveKiz : MonoBehaviour
+{
+    [SerializeField] private Sprite[] frames;
+    [SerializeField] private float animTime = 10.0f;
+    [HideInInspector] public bool isTriggered = false; //trigger alanına player girince bunu true yap
+    [HideInInspector] public bool isAbleToWork = true;
+
+
+    [HideInInspector] public SpriteRenderer mat;
+
+    void Start()
+    {
+        mat = GetComponent<SpriteRenderer>();
+
+        //StartCoroutine(Delay());
+    }
+
+    void FixedUpdate()
+    {
+        /*    int index = (int)(Time.time * fps);
+            index = index % frames.Length;
+            mat.sprite = frames[index]; // usar en planeObjects*/
+        //GetComponent<RawImage> ().texture = frames [index];
+    }
+
+    private void Update()
+    {
+        if (isAbleToWork && isTriggered)
+        {
+            StartCoroutine(Delay());
+            isAbleToWork = false;
+        }
+    }
+
+    IEnumerator Delay()
+    {
+        for (int i = 0; i < frames.Length; i++)
+        {
+            //if (frames.Length > i)
+            //{
+            mat.sprite = frames[i];
+            //}
+            //else
+            //{
+            //    StartCoroutine(Reverse());
+            //    break;
+            //}
+
+            yield return new WaitForSeconds(animTime / frames.Length);
+
+
+        }
+    }
+
+    //IEnumerator Reverse()
+    //{
+    //    for (int i = frames.Length-1; i > -2; i--)
+    //    {
+    //        if (i >= 0)
+    //        {
+    //            mat.sprite = frames[i];
+    //        }
+    //        else
+    //        {
+    //            StartCoroutine(Delay());
+    //            break;
+    //        }
+
+    //        yield return new WaitForSeconds(animTime / frames.Length);
+
+
+    //    }
+    //}
+
+
+}
+
+
+///////////////////////
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Animat_Collider : MonoBehaviour
+{
+
+
+    public Anim_AtveKiz animatGif;
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("animController");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            animatGif.isTriggered = true;
+        }
+    }
+
+}
+
