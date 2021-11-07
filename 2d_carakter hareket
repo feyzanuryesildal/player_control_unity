@@ -34,7 +34,7 @@ public class ses : MonoBehaviour
         }
     }
 
-    void FixUpdate()
+    void FixedUpdate()
     {
         Animasyon();
         karakterHaraket();
